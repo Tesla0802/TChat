@@ -3,7 +3,9 @@ const button = document.querySelector(".send");
 const curerntUserID = localStorage.getItem("userid");
 const displayAreaChat = document.querySelector("#displayAreaChat");
 const deleteButton = document.querySelector(".delete-chat");
+const down = document.querySelector(".down");
 let currentUser = {};
+let counter = 0;
 firebase
   .database()
   .ref("User")
@@ -62,7 +64,7 @@ firebase
   .on("child_added", function (snapshot) {
     if (snapshot.val().uploadUserID == curerntUserID) {
       displayAreaChat.innerHTML += `
-      <div class="my-message-flex">
+      <div class="my-message-flex" id="message${counter}">
       <div class="block my-message">
         <div class="message">
           <aside class="message-top my-message">
@@ -74,11 +76,10 @@ firebase
           </aside>
         </div>
       </div>
-    </div>
-              `;
+    </div>`;
     } else {
       displayAreaChat.innerHTML += `
-      <div class="friend-message">
+      <div class="friend-message" id="message${counter}">
               <div class="block">
                 <div class="message">
                   <aside class="message-top">
@@ -90,7 +91,9 @@ firebase
                   </aside>
                 </div>
               </div>
-            </div>
-        `;
+            </div>`;
     }
+    counter++;
+    down.href = `#message${counter - 1}`;
+    location.href = `#message${counter - 1}`;
   });
