@@ -21,7 +21,7 @@
     <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">JP_WS_21</a>
+          <a class="navbar-brand" href="./index.html">JP_WS_21</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -36,10 +36,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="./index.html"
+                <a class="nav-link" aria-current="page" href="./index.html"
                   >Home</a
                 >
               </li>
@@ -66,7 +63,11 @@
       <section class="chat">
         <article>
           <aside class="top">
-            <h3>Live Chat</h3>
+            <h3>
+              <div class="circle-red"></div>
+              Live Chat
+            </h3>
+            <button class="btn btn-danger delete-chat">Delete Chat</button>
           </aside>
           <aside class="middle" id="displayAreaChat"></aside>
           <aside class="bottom">
@@ -89,7 +90,7 @@
       src="https://kit.fontawesome.com/af6bc85f41.js"
       crossorigin="anonymous"
     ></script>
-    <script src="http://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>

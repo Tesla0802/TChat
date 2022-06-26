@@ -2,7 +2,47 @@ const input = document.querySelector("input");
 const button = document.querySelector(".send");
 const curerntUserID = localStorage.getItem("userid");
 const displayAreaChat = document.querySelector("#displayAreaChat");
+const deleteButton = document.querySelector(".delete-chat");
+let currentUser = {};
+firebase
+  .database()
+  .ref("User")
+  .on("value", (response) => {
+    response.forEach((element) => {
+      if (element.key === curerntUserID) {
+        currentUser = generateFirebaseItem(element.key, element.val());
+      }
+    });
+  });
+deleteButton.addEventListener("click", () => {
+  Swal.fire({
+    title: "დარწმუნებული ხართ?",
+    text: "უკან ვერ დავაბრუნბთ ჩათს!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire("Deleted!", "ჩათი წაიშალა.", "success");
+      removeRefFromFirebase("Meesage");
+      location.reload();
+    }
+  });
+});
+
+document.querySelector("body").addEventListener("keypress", (event) => {
+  if (event.keyCode === 13) {
+    writeSms();
+  }
+});
+
 button.addEventListener("click", () => {
+  writeSms();
+});
+
+function writeSms() {
   let text = input.value;
   if (text === "") {
     return;
@@ -11,54 +51,46 @@ button.addEventListener("click", () => {
     text: text,
     uploadUserID: curerntUserID,
     uploadTime: new Date().toLocaleString(),
+    name: currentUser.data.name,
   });
   input.value = "";
-});
+}
 
-const userArray = getArrayFromFirebase("User");
-const currentMessages = [];
-let i = 0;
-// setInterval(() => {
-//   let showedMessage = false;
-//   const messageArray = getArrayFromFirebase("Meesage");
-//   messageArray.forEach((element) => {
-//     console.log(i);
-//     if (i !== 0) {
-//       currentMessages.push(element);
-//     }
-//     i++;
-//     currentMessages.forEach((data) => {
-//       if (data.data.text == element.data.text) {
-//         showedMessage = true;
-//         return;
-//       }
-//     });
-//     if (showedMessage) {
-//       return;
-//     }
-
-//     if (element.data.uploadedUserId == curerntUserID) {
-//       displayAreaChat.innerHTML += `
-//         <div class="block">
-//         <div class="message">
-//           <aside class="message-top my-message">
-//             <i class="fa-solid fa-circle-user"></i> <span>${element.data.uploadUserID}</span>
-//           </aside>
-//           <aside class="message-bottom">${element.data.text}</aside>
-//         </div>
-//       </div>
-//         `;
-//     } else {
-//       displayAreaChat.innerHTML += `
-//         <div class="block">
-//         <div class="message">
-//           <aside class="message-top">
-//             <i class="fa-solid fa-circle-user"></i> <span>${element.data.uploadUserID}</span>
-//           </aside>
-//           <aside class="message-bottom">${element.data.text}</aside>
-//         </div>
-//       </div>
-//         `;
-//     }
-//   });
-// }, 1000);
+firebase
+  .database()
+  .ref("Meesage")
+  .on("child_added", function (snapshot) {
+    if (snapshot.val().uploadUserID == curerntUserID) {
+      displayAreaChat.innerHTML += `
+      <div class="my-message-flex">
+      <div class="block my-message">
+        <div class="message">
+          <aside class="message-top my-message">
+            <i class="fa-solid fa-circle-user"></i>
+            <span>${snapshot.val().name}</span>
+          </aside>
+          <aside class="message-bottom">
+          ${snapshot.val().text}
+          </aside>
+        </div>
+      </div>
+    </div>
+              `;
+    } else {
+      displayAreaChat.innerHTML += `
+      <div class="friend-message">
+              <div class="block">
+                <div class="message">
+                  <aside class="message-top">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span>${snapshot.val().name}</span>
+                  </aside>
+                  <aside class="message-bottom">
+                  ${snapshot.val().text}
+                  </aside>
+                </div>
+              </div>
+            </div>
+        `;
+    }
+  });

@@ -24,3 +24,9 @@ if (localStorage.getItem("userid")) {
     location.reload();
   });
 }
+
+if (!localStorage.getItem("userid")) {
+  if (location.href.split("/")[3] === "livechat.html") {
+    location.href = "index.html";
+  }
+}
