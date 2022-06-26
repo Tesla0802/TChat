@@ -4,16 +4,15 @@
 */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCvMqf0p3SFGbOGpSKC-psmmidS9YcQhqg",
-  authDomain: "jp-ws-21.firebaseapp.com",
-  databaseURL: "https://jp-ws-21-default-rtdb.firebaseio.com",
-  projectId: "jp-ws-21",
-  storageBucket: "jp-ws-21.appspot.com",
-  messagingSenderId: "173302842797",
-  appId: "1:173302842797:web:64d09af35debea372e4d24",
-  measurementId: "G-TLY1TRMNMJ",
+  apiKey: "AIzaSyCSegz0u1UrYji8TTRkoN1fGZ4i8jIQJAw",
+  authDomain: "tchat-bd751.firebaseapp.com",
+  databaseURL: "https://tchat-bd751-default-rtdb.firebaseio.com",
+  projectId: "tchat-bd751",
+  storageBucket: "tchat-bd751.appspot.com",
+  messagingSenderId: "423598181548",
+  appId: "1:423598181548:web:ddead765c29f7724c8a309",
+  measurementId: "G-TTH9WSCYDF",
 };
-
 /*
     შემდგომი ფუნქცია უბრალოდ აკავშირებს კოდს და პროექტს ერთმანეთთან
 */
