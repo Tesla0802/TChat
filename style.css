@@ -66,7 +66,7 @@ header .collapse .search i {
 }
 
 header .collapse .search i:hover {
-  color: red;
+  color: #ff0000;
 }
 
 header .collapse .search input {
@@ -87,6 +87,7 @@ main .register {
   row-gap: 20px;
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
+  color: #f5f5f5;
 }
 
 main .register .top h3 {
@@ -125,6 +126,7 @@ main .displayPosts article {
   opacity: 0.7;
   display: grid;
   place-items: center;
+  color: #f5f5f5;
 }
 
 .sk-folding-cube {
