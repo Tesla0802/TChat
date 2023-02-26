@@ -3,6 +3,9 @@ const searchBtn = document.querySelector("#search");
 const displayPost = document.querySelector("#displayPost");
 const postArray = getArrayFromFirebase("Post");
 const displayAfter = document.querySelector(".displayAfter");
+const img = document.querySelector(".card-img-top")
+const card = document.querySelector(".card")
+
 let logic = true;
 if (localStorage.getItem("userid")) {
   let url = location.href.split("/")[3];
@@ -58,7 +61,7 @@ searchBtn.addEventListener("click", () => {
 
 function displayData(displayElement, element, key) {
   displayElement.innerHTML += `
-  <div class="card" style="width: 20rem;">
+  <div class="card">
   <img src="${element.imgSrc}" class="card-img-top" alt="photo">
   <div class="card-body">
     <h5 class="card-title">${element.title}</h5>
@@ -74,3 +77,16 @@ function deletePost(key) {
   removeElementFromFirebase("Post", key);
   location.reload();
 }
+
+// card.addEventListener("mousemove", (e) => {
+//   const x = e.clientX - e.target.offsetLeft;
+//   const y = e.clientY - e.target.offsetTop;
+  
+//   img.style.transformOrigin = `${x}px ${y}px`;
+//   img.style.transform = "scale(2)"
+// })
+
+// card.addEventListener("mousemove", () => {
+//   img.style.transformOrigin = "center";
+//   img.style.transform = "scale(1)";
+// })

@@ -360,3 +360,8 @@ main .chat .top h3 {
   align-items: center;
   gap: 10px;
 }
+
+.card{
+  width: 20rem;
+}
+
